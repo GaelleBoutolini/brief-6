@@ -36,7 +36,7 @@ form {
   
   /* Applique un style au bouton de soumission */
   input[type="submit"] {
-    background-color: #0169EB;
+    background: linear-gradient(to bottom right,hsl(213, 87%, 58%), #0169EB, blue);
     color: white;
     padding: 15px 20px;
     border: none;
