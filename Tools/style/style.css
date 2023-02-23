@@ -1,0 +1,79 @@
+
+  /* Applique un style au conteneur principal */
+  .container {
+    max-width: 300px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+/* Applique un style aux éléments du formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgb(124, 117, 117);
+    border-radius: 50px;
+  }
+  
+  /* Applique un style aux étiquettes */
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Applique un style aux champs de saisie */
+  input[type="text"],
+  input[type="number"] {
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 150px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    border-radius: 50px;
+
+  }
+  
+  /* Applique un style au bouton de soumission */
+  input[type="submit"] {
+    background-color: #0169EB;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    border-radius: 50px;
+    width: 150px;
+    margin: 30px;
+  }
+
+  /* Applique un style à l'en-tête du formulaire */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0169EB
+  }
+  
+  /* Applique un style à la liste déroulante */
+  select {
+    margin-bottom: 10px;
+    width: 150px;
+    border: 1
+
+  }
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+ 
+
+
+
+
+
+
+
+
+
