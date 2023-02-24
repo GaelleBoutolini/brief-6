@@ -1,6 +1,11 @@
+<?php
+$style = "./Tools/style/Template.css";
+$title = "";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,28 +13,29 @@
     <link href="<?= $style ?>" rel="stylesheet">
     <title><?= $title ?></title>
 </head>
+
 <body>
     <!-----------------------------------header -->
     <header>
         <div id="header">
             <div id="logoDivHeader">
-                <img id="logoImage" src="../Tools/image/logoIcon.png">
-                <p id="logoText" >Equilibra</p>
+                <img id="logoImage" src="./Tools/image/logoIcon.png">
+                <p id="logoText">Equilibra</p>
             </div>
         </div>
     </header>
     <!-----------------------------------main -->
     <div id="main">
-        <div id="contain" >
-            <?= $contain ?>
+        <div id="contain">
+            <?= $contenu ?>
         </div>
     </div>
     <!-----------------------------------footer -->
     <footer>
         <div id="footer">
             <div id="logoDivFooter">
-                <img id="logoImage" src="../Tools/image/logoIcon.png">
-                <p id="logoText" >Equilibra</p>
+                <img id="logoImage" src="./Tools/image/logoIcon.png">
+                <p id="logoText">Equilibra</p>
             </div>
             <div id="footerText">
                 <div id="footerTextLeft">
@@ -46,5 +52,7 @@
             </div>
         </div>
     </footer>
+
 </body>
+
 </html>
