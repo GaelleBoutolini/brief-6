@@ -35,10 +35,9 @@
         <div><label for="mot de passe">Mot de passe</label>
 <input type="text" id="mot de pass" name="mot de passe"required></div>
        
-        
-
         <input type="submit" value="Inscription">
     </form>
     </div>
+    <p>Vous avez déjà un compte?  <span>Connectez-vous !<span></p>
 </body>
 </html>
