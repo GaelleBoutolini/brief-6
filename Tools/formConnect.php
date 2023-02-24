@@ -11,7 +11,7 @@
     <div class="container">
           
     <form method="post" action="">
-    <h2>Connexion</h2>
+    <h1>Connexion</h1>
         <div><label for="indentifiant">Indentifiant</label>
         <input type="text" id="identifiant" name="identifiant" required></div>
        
@@ -21,5 +21,6 @@
         <input type="submit" value="Connexion">
     </form>
     </div>
+    <p>Vous n'êtes pas encore inscrits?  <span>Inscrivez-vous !<span></p>
 </body>
 </html>
