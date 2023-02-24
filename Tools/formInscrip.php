@@ -24,7 +24,7 @@
         <div><label for="sexe">Sexe</label>
         <input type="text" id="sexe" name="sexe" required></div>
 
-        <div><label for="sexe">Date de naissance</label>
+        <div><label for="number">Date de naissance</label>
         <input type="text" id="date de naissance" name="date de naissance" required></div>
         
         <div> <label for="text">Taille(cm)</label>
