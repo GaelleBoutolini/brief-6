@@ -18,6 +18,7 @@
     <p>Vous n'êtes pas encore inscrit ? <a href="./index.php?action=displaySignup">Inscrivez&#8209;vous&nbsp;!</a></p>
 </main>
 
+
 <?php $title = 'Connexion - Equilibra' ?>
 <?php $style = './Tools/style/Form.css'; ?>
 <?php $logout = "" ?>

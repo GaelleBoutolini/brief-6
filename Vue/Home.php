@@ -15,6 +15,7 @@
     </form>
 </div>
 
+<?php $logout = '' ?>
 <?php $title = 'Home' ?>
 <?php $style = './Tools/style/Home.css' ?>
 <?php $logout = "" ?>

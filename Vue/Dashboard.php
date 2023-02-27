@@ -65,13 +65,29 @@
                     </div>
                 </section>
                 <section id="profil">
+                    <div class="title">
+                        <h2>Mon profil</h2>
+                        <i class="fa-solid fa-pen"></i>
 
+                    </div>
+                    <div class="information">
+                        <div>
+                            <p>Dupont</p>
+                        </div>
+
+                        <p>Louis</p>
+                        <p>1m78</p>
+                        <p>67kg</p>
+                        <p>IMC : 21.5</p>
+                        <p>Corpoulence normale</p>
+                        <p>Actif</p>
                 </section>
             </div>
         </div>
         <section id="stats"></section>
     </div>
 </main>
+
 
 <?php $title = 'Dashboard - Equilibra'; ?>
 <?php $style = './Tools/style/Dashboard.css'; ?>
