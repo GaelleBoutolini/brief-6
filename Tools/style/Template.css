@@ -1,4 +1,4 @@
-/* ------------------------body */
+/* ----------------------------body */
 
 body {
     margin: 0;
@@ -89,7 +89,7 @@ body {
 
 #footerTextLeft {
     color: azure;
-    width: 230px;
+    width: 250px;
     margin-left: 20px;
     margin-bottom: 0px;
     margin-top: 0px;
@@ -101,8 +101,9 @@ body {
     flex-direction: column;
     justify-content: space-around;
     color: azure;
-    width: 230px;
+    width: 250px;
     margin-right: 20px;
     margin-bottom: 0px;
     margin-top: 0px;
+    font-weight: bold;
 }
