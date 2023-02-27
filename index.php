@@ -21,8 +21,8 @@ try {
             editUser();
         } else if ($_GET['action'] == 'deleteUser') {
             deleteUser();
-        } else if ($_GET['action'] == 'logOut') {
-            logOut();
+        } else if ($_GET['action'] == 'logout') {
+            logout();
         } else
             throw new Exception("Action non valide");
     } else {

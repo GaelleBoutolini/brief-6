@@ -16,6 +16,7 @@ function displaySignup()
 // Inscription de l'utilisateur
 function signup()
 {
+    require './Vue/Successfull_signup.php';
 }
 
 // Afficher la page de connexion
@@ -27,6 +28,7 @@ function displayLogin()
 // Connexion de l'utilisateur
 function login()
 {
+    require './Vue/Dashboard.php';
 }
 
 // Afficher la page d'ajout de repas
@@ -49,6 +51,7 @@ function displayEditUser()
 // Modification d'un utilisateur 
 function editUser()
 {
+    require './Vue/Dashboard.php';
 }
 
 // Modification d'un utilisateur 
@@ -57,7 +60,7 @@ function deleteUser()
 }
 
 // Déconnexion
-function logOut()
+function logout()
 {
 }
 
