@@ -62,6 +62,7 @@
     <p>Vous avez déjà un compte ? <a href="./index.php?action=displayLogin">Connectez-vous&nbsp;!</a></p>
 </main>
 
+<?php $logout = '' ?>
 <?php $title = 'Inscription - Equilibra' ?>
 <?php $style = './Tools/style/Form.css'; ?>
 <?php $contenu = ob_get_clean(); ?>

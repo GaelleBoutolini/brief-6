@@ -9,6 +9,40 @@ main{
     margin: 30px auto;
 }
 
+#profil{
+    box-shadow: 0px 0px 5px #bababa;
+    background: linear-gradient(90deg,#019AF1 0%, #005BE9 100%);
+    width: 300px;
+  padding: 10px;
+    border-radius: 30px;
+    text-align: center;
+    font-weight: 600;
+
+   
+}
+#profil h2{
+    color: white;
+}
+.fa-solid{
+    
+    color: white;
+}
+
+.title{
+    display: flex;
+    justify-content:space-between;
+
+}
+
+.information p{
+    border: 1px solid white;
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+
+
 h2 {
     text-align: start;
     margin: 0;
