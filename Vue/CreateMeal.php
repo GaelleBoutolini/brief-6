@@ -33,7 +33,7 @@
     </div>
 </main>
 
-<?php $logout = "<a class='logout'><i class='fa-solid fa-power-off'></i></a>" ?>
+<?php $logout = "<a href='./index.php?action=home' class='logout'><i class='fa-solid fa-power-off'></i></a>" ?>
 <?php $title = 'Ajouter un repas - Equilibra' ?>
 <?php $style = './Tools/style/Form.css'; ?>
 <?php $contenu = ob_get_clean(); ?>

@@ -53,9 +53,21 @@
             </div>
             <div id="total-kcal">Total : <span>3250</span>kcal</div>
         </section>
-        <div>
-            <section id="objectif"></section>
-            <section id="profil"></section>
+        <div id="main-bottom">
+            <div id="objectif-profil">
+                <section id="objectif">
+                    <div id="objectif-calorie">
+                        <div>Objectif journalier</div>
+                        <div id="kcal"><span>2978</span>kcal</div>
+                    </div>
+                    <div id="résultat">
+                        Échec
+                    </div>
+                </section>
+                <section id="profil">
+
+                </section>
+            </div>
         </div>
         <section id="stats"></section>
     </div>
@@ -63,6 +75,6 @@
 
 <?php $title = 'Dashboard - Equilibra'; ?>
 <?php $style = './Tools/style/Dashboard.css'; ?>
-<?php $logout = "<a class='logout'><i class='fa-solid fa-power-off'></i></a>" ?>
+<?php $logout = "<a href='./index.php' class='logout'><i class='fa-solid fa-power-off'></i></a>" ?>
 <?php $contenu = ob_get_clean(); ?>
 <?php require 'Template.php'; ?>

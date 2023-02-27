@@ -20,5 +20,6 @@
 
 <?php $title = 'Connexion - Equilibra' ?>
 <?php $style = './Tools/style/Form.css'; ?>
+<?php $logout = "" ?>
 <?php $contenu = ob_get_clean(); ?>
 <?php require 'Template.php'; ?>

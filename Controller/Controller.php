@@ -1,7 +1,6 @@
 <?php
 require './Model/Model.php';
 
-
 function home()
 {
     require './Vue/Home.php';

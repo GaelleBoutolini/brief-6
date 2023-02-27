@@ -8,6 +8,5 @@
 <?php $title = 'Inscription réussi - Equilibra' ?>
 <?php $style = './Tools/style/Form.css'; ?>
 <?php $contenu = ob_get_clean(); ?>
-
-
+<?php $logout = "" ?>
 <?php require 'Template.php'; ?>

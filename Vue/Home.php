@@ -17,6 +17,6 @@
 
 <?php $title = 'Home' ?>
 <?php $style = './Tools/style/Home.css' ?>
-<?php $logout = "<a class='logout'><i class='fa-solid fa-power-off'></i></a>" ?>
+<?php $logout = "" ?>
 <?php $contenu = ob_get_clean(); ?>
 <?php require 'Template.php'; ?>
