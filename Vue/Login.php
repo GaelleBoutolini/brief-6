@@ -6,13 +6,23 @@
             <h2>Connexion</h2>
             <div>
                 <label for="identifiant">Identifiant</label>
+                <?php if(isset($mail)) : ?>
+                <input type="email" id="identifiant" name="identifiant" value="<?= $mail ?>" required>
+                <?php else : ?>
                 <input type="email" id="identifiant" name="identifiant" required>
+                <?php endif ?>
             </div>
             <div>
                 <label for="password">Mot de passe</label>
+                <?php if(isset($password)) : ?>
+                <input type="password" id="password" name="password" value="<?= $password ?>" required>
+                <?php else : ?>
                 <input type="password" id="password" name="password" required>
+                <?php endif ?>
             </div>
+            <?php if(isset($erreurConnexion)) : ?>
             <p><?php echo $erreurConnexion ?></p>
+            <?php endif ?>
             <input id="form-btn" type="submit" value="Connexion">
         </form>
     </div>

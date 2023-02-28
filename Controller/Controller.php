@@ -71,6 +71,7 @@ function login()
         // print_r($result);
 
         if($result === true) {
+
             require './Vue/Dashboard.php';
         } else {
             $erreurConnexion = "Mdp/Id incorrect";
@@ -117,3 +118,33 @@ function error($msgErreur)
 {
     require './Vue/Error.php';
 }
+
+
+
+
+//Fonctions de calcul
+//--------------------------------------
+
+function imc() {
+    //calcul imc, aussi fait dans model->getUserInfo
+}
+
+function dailyCaloriesTotal() {
+    //calcul total calorie de la journée
+}
+
+function dailyCaloriesGoal () {
+    //calcul TMB * activité
+}
+
+function dailyLimit() {
+    //la limite journaliere a elle été depassé ?
+}
+
+function totalTenDaysCalories() {
+    //pour le graphique, 10 jours de 
+    //->dailyCaloriesTotal
+    // et 
+    //-> dailyTenDaysCalories
+}
+
