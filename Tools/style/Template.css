@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+/* ----------------------------body */
+=======
 /* ------------------------général */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+>>>>>>> 246d8b695ca1f5c6bf36af2b8d49cce3c2798ae9
 
 *{
     font-family: 'Montserrat', sans-serif;
@@ -106,7 +110,12 @@ footer {
 }
 
 #footerTextLeft {
+<<<<<<< HEAD
+    color: azure;
+    width: 250px;
+=======
     width: 230px;
+>>>>>>> 246d8b695ca1f5c6bf36af2b8d49cce3c2798ae9
     margin-left: 20px;
     margin-bottom: 0px;
     margin-top: 0px;
@@ -122,6 +131,15 @@ footer {
 #footerTextRight {
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
+    justify-content: space-around;
+    color: azure;
+    width: 250px;
+    margin-right: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-weight: bold;
+=======
     width: 230px;
     margin-right: 20px;
     margin-bottom: 0px;
@@ -253,4 +271,5 @@ footer {
         height: 135px;
     }
 
+>>>>>>> 246d8b695ca1f5c6bf36af2b8d49cce3c2798ae9
 }

@@ -12,6 +12,7 @@
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <p><?php $erreurConnexion ?></p>
             <input id="form-btn" type="submit" value="Connexion">
         </form>
         <p>Vous n'êtes pas encore inscrit ? <a href="./index.php?action=displaySignup">Inscrivez&#8209;vous&nbsp;!</a></p>

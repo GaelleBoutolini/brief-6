@@ -1,3 +1,5 @@
+<?php $logout = "" ?>
+
 <?php ob_start(); ?>
 <main>
     <div class="container">
@@ -20,14 +22,14 @@
                 <div>
                     <label for="sexe">Sexe</label>
                     <select name="sexe" id="sexe">
-                        <option value="Homme">Homme</option>
-                        <option value="Femme">Femme</option>
+                        <option value="Homme">H</option>
+                        <option value="Femme">F</option>
                     </select>
                 </div>
 
                 <div>
-                    <label for="naissance">Date de naissance</label>
-                    <input type="date" id="naissance" name="naissance" required>
+                    <label for="age">Age</label>
+                    <input type="number" id="naissance" name="age" required>
                 </div>
             </div>
             <div class="flex-50">

@@ -9,7 +9,7 @@ try {
             signup();
         } else if ($_GET['action'] == 'displayLogin') {
             displayLogin();
-        } elseif ($_GET['action'] == 'login') {
+        } else if ($_GET['action'] == 'login') {
             login();
         } else if ($_GET['action'] == 'displayCreateMeal') {
             displayCreateMeal();

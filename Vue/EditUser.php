@@ -25,8 +25,8 @@
                 </div>
 
                 <div>
-                    <label for="naissance">Date de naissance</label>
-                    <input type="date" id="naissance" name="naissance" required>
+                    <label for="age">Date de naissance</label>
+                    <input type="number" id="naissance" name="age" required>
                 </div>
             </div>
             <div class="flex-50">
