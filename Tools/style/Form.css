@@ -9,6 +9,8 @@ main{
 
 .container {
     margin: 5px;
+    animation: slide-top cubic-bezier(0.250, 0.460, 0.450, 0.940) 800ms backwards
+
 }
 
 main p {
@@ -41,6 +43,28 @@ form {
     border-radius: 30px;
     padding: 40px 0;
 }
+
+@keyframes slide-top {
+    0% {
+      transform: translateY(500px);
+        opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+@keyframes scale {
+    0% {
+      transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 
 form > div{
     width: 85%;

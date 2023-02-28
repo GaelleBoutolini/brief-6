@@ -14,8 +14,8 @@
             </div>
             <input id="form-btn" type="submit" value="Connexion">
         </form>
+        <p>Vous n'êtes pas encore inscrit ? <a href="./index.php?action=displaySignup">Inscrivez&#8209;vous&nbsp;!</a></p>
     </div>
-    <p>Vous n'êtes pas encore inscrit ? <a href="./index.php?action=displaySignup">Inscrivez&#8209;vous&nbsp;!</a></p>
 </main>
 
 

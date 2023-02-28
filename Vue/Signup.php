@@ -58,13 +58,12 @@
 
             <input id="form-btn" type="submit" value="Inscription">
         </form>
+        <p>Vous avez déjà un compte ? <a href="./index.php?action=displayLogin">Connectez-vous&nbsp;!</a></p>
     </div>
-    <p>Vous avez déjà un compte ? <a href="./index.php?action=displayLogin">Connectez-vous&nbsp;!</a></p>
 </main>
 
 <?php $logout = '' ?>
 <?php $title = 'Inscription - Equilibra' ?>
 <?php $style = './Tools/style/Form.css'; ?>
-<?php $logout = "" ?>
 <?php $contenu = ob_get_clean(); ?>
 <?php require 'Template.php'; ?>

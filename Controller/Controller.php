@@ -66,5 +66,7 @@ function logout()
 // Erreur
 function error($msgErreur)
 {
+ 
     require './Vue/Error.php';
+
 }

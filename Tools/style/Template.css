@@ -64,6 +64,8 @@ main {
 
 footer {
     /* height: 24.91vh; */
+    position: relative;
+    z-index: 2;
     padding-bottom: 50px;
     background-image: linear-gradient(31deg, #009BF1 0%, #1e6add 80%, #005BE9 80%, #005BE9);
 }
@@ -191,7 +193,7 @@ footer {
 
 .logout:hover{
     background: white;
-    color: #5EC2B0;
+    color: #5EC2B0 ;
     cursor: pointer;
 }
 

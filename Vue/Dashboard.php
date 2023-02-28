@@ -4,7 +4,7 @@
         <div id="btn-container">
             <a id="add-btn" href="./index.php?action=displayCreateMeal">
                 <i class="fa-solid fa-plus"></i>
-                Nouveau plat
+                Ajouter un plat
             </a>
         </div>
         <section id="historique">
@@ -67,30 +67,29 @@
                 <section id="profil">
                     <div class="title">
                         <h2>Mon profil</h2>
-                        <i class="fa-solid fa-pen"></i>
-
+                        <a href="./index.php?action=displayEditUser"><i class="fa-solid fa-pen"></i></a>
                     </div>
                     <div class="information">
-                        <div>
-                            <p>Dupont</p>
-                        </div>
-
+                        <p>Dupont</p>
                         <p>Louis</p>
                         <p>1m78</p>
                         <p>67kg</p>
                         <p>IMC : 21.5</p>
                         <p>Corpoulence normale</p>
                         <p>Actif</p>
+                    </div>
                 </section>
             </div>
+
+            <section id="stats"></section>
         </div>
-        <section id="stats"></section>
     </div>
 </main>
 
 
 <?php $title = 'Dashboard - Equilibra'; ?>
 <?php $style = './Tools/style/Dashboard.css'; ?>
-<?php $logout = "<a href='./index.php' class='logout'><i class='fa-solid fa-power-off'></i></a>" ?>
+<?php $logout = "<a href='./index.php' class='logout' title='Déconnexion'><i class='fa-solid fa-power-off'></i></a>" ?>
 <?php $contenu = ob_get_clean(); ?>
+
 <?php require 'Template.php'; ?>
