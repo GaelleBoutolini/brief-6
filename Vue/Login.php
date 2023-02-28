@@ -12,7 +12,7 @@
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <p><?php $erreurConnexion ?></p>
+            <p><?php echo $erreurConnexion ?></p>
             <input id="form-btn" type="submit" value="Connexion">
         </form>
     </div>

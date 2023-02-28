@@ -73,8 +73,8 @@ function login()
         if($result === true) {
             require './Vue/Dashboard.php';
         } else {
-            return "<p>erreur</p>";
-            // require './Vue/Login.php';
+            $erreurConnexion = "Mdp/Id incorrect";
+            require './Vue/Login.php';
         }
     }
 }
