@@ -16,7 +16,7 @@ function displaySignup()
 function signup()
 {
 
-    if(!empty($_POST)) {
+    if (!empty($_POST)) {
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
         $sexe = $_POST['sexe'];
@@ -26,7 +26,7 @@ function signup()
         $poids = $_POST['poids'];
         $taille = $_POST['taille'];
         $activite = $_POST['activite'];
-    
+
         // echo $nom;
         // echo $prenom;
         // echo $sexe;
@@ -39,13 +39,12 @@ function signup()
 
         $result = getSignup($nom, $prenom, $sexe, $age, $email, $password, $poids, $taille, $activite);
 
-        if($result === true) {
+        if ($result === true) {
             require './Vue/Successfull_signup.php';
         } else {
             echo "<p>Une erreur est survenue</p>";
         }
     }
-
 }
 
 // Afficher la page de connexion
@@ -58,7 +57,7 @@ function displayLogin()
 function login()
 {
 
-    if(!empty($_POST)) {
+    if (!empty($_POST)) {
         $mail = $_POST['identifiant'];
         $password = $_POST['password'];
 
@@ -69,11 +68,13 @@ function login()
 
         // print_r($result);
 
-        if($result === true) {
+        if ($result === true) {
+            session_start();
+            session_regenerate_id(true);
+            $_SESSION['id'] = 6543;
             require './Vue/Dashboard.php';
         } else {
-            $erreurConnexion = "Mdp/Id incorrect";
-            require './Vue/Login.php';
+            $erreurConnexion = "<p>Mdp/Id incorrect</p>";
         }
     }
 }
@@ -109,12 +110,22 @@ function deleteUser()
 // Déconnexion
 function logout()
 {
+    /*Si la variable de session age est définie, on echo sa valeur
+             *puis on la détruit avec unset()*/
+    if (isset($_SESSION['id'])) {
+        echo 'id : ' . $_SESSION['id'] . '<br>';
+        unset($_SESSION['id']);
+    }
+    /*On détruit les données de session*/
+    session_destroy();
+
+    require './Vue/Home.php';
 }
 
 // Erreur
 function error($msgErreur)
 {
- 
-    require './Vue/Error.php';
 
+
+    require './Vue/Error.php';
 }
