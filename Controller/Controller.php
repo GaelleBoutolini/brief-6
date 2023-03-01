@@ -68,15 +68,20 @@ function login()
 
         // print_r($result);
 
+
         if ($result === true) {
             session_start();
             session_regenerate_id(true);
             $_SESSION['id'] = 6543;
+
+        if($result === true) {
+
             require './Vue/Dashboard.php';
         } else {
             $erreurConnexion = "<p>Mdp/Id incorrect</p>";
         }
     }
+}
 }
 
 // Afficher la page d'ajout de repas
@@ -129,3 +134,33 @@ function error($msgErreur)
 
     require './Vue/Error.php';
 }
+
+
+
+
+//Fonctions de calcul
+//--------------------------------------
+
+function imc() {
+    //calcul imc, aussi fait dans model->getUserInfo
+}
+
+function dailyCaloriesTotal() {
+    //calcul total calorie de la journée
+}
+
+function dailyCaloriesGoal () {
+    //calcul TMB * activité
+}
+
+function dailyLimit() {
+    //la limite journaliere a elle été depassé ?
+}
+
+function totalTenDaysCalories() {
+    //pour le graphique, 10 jours de 
+    //->dailyCaloriesTotal
+    // et 
+    //-> dailyTenDaysCalories
+}
+
