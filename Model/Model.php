@@ -46,32 +46,33 @@ function getLogin($mail, $password)
 {
 
     $pdo = getConnection();
-    $query = $pdo->prepare("SELECT Mdp FROM Utilisateur WHERE Email = :mail");
+    $query = $pdo->prepare("SELECT Mdp, Id_user FROM Utilisateur WHERE Email = :mail");
     $query->bindParam(':mail', $mail);
     $query->execute();
     $pass = $query->fetch();
 
     if ($pass != NULL) {
         if ($pass[0] === $password) {
-            $result = true;
+            $userId = $pass[1];
         } else {
-            $result = false;
+            $userId = NULL;
         }
     } else {
-        $result = false;
+        $userId = NULL;
     }
-    return $result;
+    return $userId;
 }
 
-function getDayMeals($dayDate) {
+function getDayMeals($dayDate, $id) {
 
     $paramDate = $dayDate . '%';
 
     $pdo = getConnection();
     $query = $pdo->prepare("SELECT Type, Description, Kcal, Date, TIME(Date) AS heure 
                             FROM Repas 
-                            WHERE Id_user = 1 AND Date LIKE :paramDate");
+                            WHERE Id_user = :id AND Date LIKE :paramDate");
     $query->bindParam(':paramDate', $paramDate);
+    $query->bindParam(':id', $id);
     $query->execute();
     $meals = $query->fetchAll(PDO::FETCH_ASSOC);
 

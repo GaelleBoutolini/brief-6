@@ -62,7 +62,7 @@
 
 <?php $title = 'Dashboard - Equilibra'; ?>
 <?php $style = './Tools/style/Dashboard.css'; ?>
-<?php $logout = "<a href='./index.php' class='logout' title='Déconnexion'><i class='fa-solid fa-power-off'></i></a>" ?>
+<?php $logout = "<a href='./index.php?action=logout' class='logout' title='Déconnexion'><i class='fa-solid fa-power-off'></i></a>" ?>
 <?php $contenu = ob_get_clean(); ?>
 
 <?php require 'Template.php'; ?>

@@ -1,21 +1,25 @@
 <?php
 require './Model/Model.php';
 
+session_start();
+
 function home()
 {
+
+    session_unset();
     require './Vue/Home.php';
 };
 
 // Afficher la page d'inscription
 function displaySignup()
 {
+    session_unset();
     require './Vue/Signup.php';
 }
 
 // Inscription de l'utilisateur
 function signup()
 {
-
     if (!empty($_POST)) {
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
@@ -38,7 +42,6 @@ function signup()
         // echo $activite;
 
         $result = getSignup($nom, $prenom, $sexe, $age, $email, $password, $poids, $taille, $activite);
-
         if ($result === true) {
             require './Vue/Successfull_signup.php';
         } else {
@@ -53,10 +56,15 @@ function displayLogin()
     require './Vue/Login.php';
 }
 
+
 // Connexion de l'utilisateur
 function login()
 {
-
+    // if ($_SESSION['id']) {
+    //     require './Vue/Dashboard.php';
+    // } else {
+    //     require './Vue/Home.php';
+    // }
     if (!empty($_POST)) {
         $mail = $_POST['identifiant'];
         $password = $_POST['password'];
@@ -64,33 +72,39 @@ function login()
         // echo $mail;
         // echo $password;
 
-        $result = getLogin($mail, $password);
+        $userId = getLogin($mail, $password);
 
         // print_r($result);
 
-        if ($result === true) {
-            session_start();
-            session_regenerate_id(true);
-            $_SESSION['id'] = 1;
 
-        if($result === true) {
-            loadDashboard();
+        if ($userId != NULL) {
+            $_SESSION['id'] = $userId;
+            header('Location: index.php?action=displayDashboard');
         } else {
             $erreurConnexion = "<p>Mdp/Id incorrect</p>";
         }
     }
 }
-}
 
-function loadDashboard() {
+function displayDashboard() {
 
-    $dayDate = "2023-02-24";
-    $id = 1;
+    if (!isset($_SESSION['id'])) {
+        require './Vue/Home.php';
+        header('Location: index.php');
+    } else {
+        print_r($_SESSION);
+        echo "<br>id = " .  $_SESSION['id'];
+   
+    }
+
+    $dayDate = date("Y-m-d", time()) ;
+    echo $dayDate;
+    $id = $_SESSION['id'];
 
     //fonction model (questionne la base de donnée)
 
     //$meals = getDayMeals($date);              :tableau           //permet d'obtenir les infos des repas du jour
-    $meals = getDayMeals($dayDate);
+    $meals = getDayMeals($dayDate, $id);
 
     //$userInfo = getUserInfo();                :tableau           //permet d'obtenir les infos de l'user
     $userInfo = getUserInfo($id);
@@ -112,18 +126,35 @@ function loadDashboard() {
 // Afficher la page d'ajout de repas
 function displayCreateMeal()
 {
-    require './Vue/CreateMeal.php';
+
+    if (!isset($_SESSION['id'])) {
+        require './Vue/Home.php';
+        header('Location: index.php');
+    } else {
+        print_r($_SESSION);
+        echo "<br>id = " .  $_SESSION['id'];
+
+        require './Vue/CreateMeal.php';
+    }
 }
 
 // Ajout d'un repas
 function createMeal()
 {
+    
 }
 
 // Afficher la page de modification d'utilisateur
 function displayEditUser()
 {
-    require './Vue/EditUser.php';
+    if (!isset($_SESSION['id'])) {
+        require './Vue/Home.php';
+        header('Location: index.php');
+    } else {
+        print_r($_SESSION);
+        echo "<br>id = " .  $_SESSION['id'];
+        require './Vue/EditUser.php';
+    }
 }
 
 // Modification d'un utilisateur 
@@ -142,21 +173,14 @@ function logout()
 {
     /*Si la variable de session age est définie, on echo sa valeur
              *puis on la détruit avec unset()*/
-    if (isset($_SESSION['id'])) {
-        echo 'id : ' . $_SESSION['id'] . '<br>';
-        unset($_SESSION['id']);
-    }
-    /*On détruit les données de session*/
-    session_destroy();
 
-    require './Vue/Home.php';
+    home();
+    header('Location: index.php');
 }
 
 // Erreur
 function error($msgErreur)
 {
-
-
     require './Vue/Error.php';
 }
 
@@ -170,11 +194,13 @@ function imc($userInfo) {
     //calcul imc, aussi fait dans model->getUserInfo
 }
 
-function dailyCaloriesTotal() {
+function dailyCaloriesTotal()
+{
     //calcul total calorie de la journée
 }
 
-function dailyCaloriesGoal () {
+function dailyCaloriesGoal()
+{
     //calcul TMB * activité
 }
 
@@ -183,7 +209,8 @@ function isGoalAchieved() {
     //calorie total - calorie goal 
 }
 
-function totalTenDaysCalories() {
+function totalTenDaysCalories()
+{
     //pour le graphique, 10 jours de 
     //->dailyCaloriesTotal
     // et 
