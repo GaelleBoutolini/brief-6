@@ -102,6 +102,7 @@ function loadDashboard() {
     //fonction controlleur (utilise les donnée rendue par le model pour faire des calcul)
 
     //$imc = imc($userInfo);                                                :int
+    $imc = imc($userInfo);
     //$dailyCalTotal = dailyCaloriesTotal($meals);                          :int
     //$dailyCalGoal = dailyCaloriesGoal($userInfo);                         :int
     //$goalAchieved = isGoalAchieved($dailyCalTotal, $dailyCalGoal);        :bool
