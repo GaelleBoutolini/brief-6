@@ -10,46 +10,18 @@
         <section id="historique">
             <h2 id="jour">Vos repas de la journée du : <span id="today">25/05/2023</span></h2>
             <div id="repas">
+
+                <?php foreach($meals as $meal) : ?>
                 <div class="repas-container">
-                    <h3>P'tit dej</h3>
-                    <span class="nom-repas">Céréales Muesli</span>
+                    <h3><?= $meal["Type"] ?></h3>
+                    <span class="nom-repas"><?= $meal["Description"] ?></span>
                     <div>
-                        <span class="kcal"><span>260</span>kcal</span>
-                        <span class="heure">9:00</span>
+                        <span class="kcal"><span><?= $meal["Kcal"] ?></span>kcal</span>
+                        <span class="heure"><?= $meal["heure"] ?></span>
                     </div>
                 </div>
-                <div class="repas-container">
-                    <h3>P'tit dej</h3>
-                    <span class="nom-repas">Céréales Muesli</span>
-                    <div>
-                        <span class="kcal"><span>260</span>kcal</span>
-                        <span class="heure">9:00</span>
-                    </div>
-                </div>
-                <div class="repas-container">
-                    <h3>P'tit dej</h3>
-                    <span class="nom-repas">Céréales Muesli</span>
-                    <div>
-                        <span class="kcal"><span>260</span>kcal</span>
-                        <span class="heure">9:00</span>
-                    </div>
-                </div>
-                <div class="repas-container">
-                    <h3>P'tit dej</h3>
-                    <span class="nom-repas">Céréales Muesli</span>
-                    <div>
-                        <span class="kcal"><span>260</span>kcal</span>
-                        <span class="heure">9:00</span>
-                    </div>
-                </div>
-                <div class="repas-container">
-                    <h3>P'tit dej</h3>
-                    <span class="nom-repas">Céréales Muesli</span>
-                    <div>
-                        <span class="kcal"><span>260</span>kcal</span>
-                        <span class="heure">9:00</span>
-                    </div>
-                </div>
+                <?php endforeach; ?>
+
             </div>
             <div id="total-kcal">Total : <span>3250</span>kcal</div>
         </section>
@@ -70,18 +42,19 @@
                         <a href="./index.php?action=displayEditUser"><i class="fa-solid fa-pen"></i></a>
                     </div>
                     <div class="information">
-                        <p>Dupont</p>
-                        <p>Louis</p>
-                        <p>1m78</p>
-                        <p>67kg</p>
-                        <p>IMC : 21.5</p>
-                        <p>Corpoulence normale</p>
-                        <p>Actif</p>
+                        <p><?= $userInfo["Nom"] ?></p>
+                        <p><?= $userInfo["Prenom"] ?></p>
+                        <p><?= $userInfo["Taille"] ?> cm</p>
+                        <p><?= $userInfo["Poids"] ?> kg</p>
+                        <p>--- IMC : 21.5</p>
+                        <p>--- Corpulence normale</p>
+                        <p><?= $userInfo["Activite"] ?></p>
                     </div>
                 </section>
             </div>
 
             <section id="stats"></section>
+            
         </div>
     </div>
 </main>

@@ -68,20 +68,45 @@ function login()
 
         // print_r($result);
 
-
         if ($result === true) {
             session_start();
             session_regenerate_id(true);
-            $_SESSION['id'] = 6543;
+            $_SESSION['id'] = 1;
 
         if($result === true) {
-
-            require './Vue/Dashboard.php';
+            loadDashboard();
         } else {
             $erreurConnexion = "<p>Mdp/Id incorrect</p>";
         }
     }
 }
+}
+
+function loadDashboard() {
+
+    $dayDate = "2023-02-24";
+    $id = 1;
+
+    //fonction model (questionne la base de donnée)
+
+    //$meals = getDayMeals($date);              :tableau           //permet d'obtenir les infos des repas du jour
+    $meals = getDayMeals($dayDate);
+
+    //$userInfo = getUserInfo();                :tableau           //permet d'obtenir les infos de l'user
+    $userInfo = getUserInfo($id);
+
+    //$lastTenDays = GetLastTenDays();          :tableau           //permet d'obtenir les calories des 10 derniers jours et les objectif (deux courbes)
+
+
+
+    //fonction controlleur (utilise les donnée rendue par le model pour faire des calcul)
+
+    //$imc = imc($userInfo);                                                :int
+    //$dailyCalTotal = dailyCaloriesTotal($meals);                          :int
+    //$dailyCalGoal = dailyCaloriesGoal($userInfo);                         :int
+    //$goalAchieved = isGoalAchieved($dailyCalTotal, $dailyCalGoal);        :bool
+
+    require './Vue/Dashboard.php';
 }
 
 // Afficher la page d'ajout de repas
@@ -141,7 +166,7 @@ function error($msgErreur)
 //Fonctions de calcul
 //--------------------------------------
 
-function imc() {
+function imc($userInfo) {
     //calcul imc, aussi fait dans model->getUserInfo
 }
 
@@ -153,8 +178,9 @@ function dailyCaloriesGoal () {
     //calcul TMB * activité
 }
 
-function dailyLimit() {
+function isGoalAchieved() {
     //la limite journaliere a elle été depassé ?
+    //calorie total - calorie goal 
 }
 
 function totalTenDaysCalories() {
@@ -162,5 +188,10 @@ function totalTenDaysCalories() {
     //->dailyCaloriesTotal
     // et 
     //-> dailyTenDaysCalories
-}
 
+
+    //for(i = 0; i < 10; i++)               boucle*10 avec la date qui change a chaque iteration
+    //$userInfo = getDayMeals($date);     
+    // dailyCaloriesGoal($userInfo);
+
+}

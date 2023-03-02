@@ -62,3 +62,32 @@ function getLogin($mail, $password)
     }
     return $result;
 }
+
+function getDayMeals($dayDate) {
+
+    $paramDate = $dayDate . '%';
+
+    $pdo = getConnection();
+    $query = $pdo->prepare("SELECT Type, Description, Kcal, Date, TIME(Date) AS heure 
+                            FROM Repas 
+                            WHERE Id_user = 1 AND Date LIKE :paramDate");
+    $query->bindParam(':paramDate', $paramDate);
+    $query->execute();
+    $meals = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    return $meals;
+}
+
+
+function getUserInfo($id) {
+
+    $pdo = getConnection();
+    $query = $pdo->prepare("SELECT Nom, Prenom, Taille, Poids, Activite
+                            FROM Utilisateur
+                            WHERE Id_user = :id");
+    $query->bindParam(':id', $id);
+    $query->execute();
+    $userInfo = $query->fetch(PDO::FETCH_ASSOC);
+
+    return $userInfo;
+}
