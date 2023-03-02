@@ -61,7 +61,7 @@
     <p></p>
 </main>
 
-<?php $logout = "<a href='./index.php?action=home' class='logout' title='Déconnexion'><i class='fa-solid fa-power-off'></i></a>" ?>
+<?php $logout = "<a href='./index.php?action=logout' class='logout' title='Déconnexion'><i class='fa-solid fa-power-off'></i></a>" ?>
 <?php $title = 'Modifier mon profil - Equilibra' ?>
 <?php $style = './Tools/style/Form.css'; ?>
 <?php $contenu = ob_get_clean(); ?>

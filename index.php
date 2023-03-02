@@ -21,6 +21,8 @@ try {
             editUser();
         } else if ($_GET['action'] == 'deleteUser') {
             deleteUser();
+        } else if ($_GET['action'] == 'displayDashboard') {
+            displayDashboard();
         } else if ($_GET['action'] == 'logout') {
             logout();
         } else

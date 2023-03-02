@@ -46,19 +46,19 @@ function getLogin($mail, $password)
 {
 
     $pdo = getConnection();
-    $query = $pdo->prepare("SELECT Mdp FROM Utilisateur WHERE Email = :mail");
+    $query = $pdo->prepare("SELECT Mdp, Id_user FROM Utilisateur WHERE Email = :mail");
     $query->bindParam(':mail', $mail);
     $query->execute();
     $pass = $query->fetch();
 
     if ($pass != NULL) {
         if ($pass[0] === $password) {
-            $result = true;
+            $userId = $pass[1];
         } else {
-            $result = false;
+            $userId = NULL;
         }
     } else {
-        $result = false;
+        $userId = NULL;
     }
-    return $result;
+    return $userId;
 }
