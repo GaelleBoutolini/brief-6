@@ -46,15 +46,15 @@
                         <p><?= $userInfo["Prenom"] ?></p>
                         <p><?= $userInfo["Taille"] ?> cm</p>
                         <p><?= $userInfo["Poids"] ?> kg</p>
-                        <p>--- IMC : 21.5</p>
-                        <p>--- Corpulence normale</p>
+                        <p>IMC : <?= $imc ?></p>
+                        <p><?= $physique ?></p>
                         <p><?= $userInfo["Activite"] ?></p>
                     </div>
                 </section>
             </div>
 
             <section id="stats"></section>
-            
+    
         </div>
     </div>
 </main>
@@ -62,7 +62,7 @@
 
 <?php $title = 'Dashboard - Equilibra'; ?>
 <?php $style = './Tools/style/Dashboard.css'; ?>
-<?php $logout = "<a href='./index.php' class='logout' title='Déconnexion'><i class='fa-solid fa-power-off'></i></a>" ?>
+<?php $logout = "<a href='./index.php?action=logout' class='logout' title='Déconnexion'><i class='fa-solid fa-power-off'></i></a>" ?>
 <?php $contenu = ob_get_clean(); ?>
 
 <?php require 'Template.php'; ?>

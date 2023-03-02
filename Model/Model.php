@@ -46,32 +46,33 @@ function getLogin($mail, $password)
 {
 
     $pdo = getConnection();
-    $query = $pdo->prepare("SELECT Mdp FROM Utilisateur WHERE Email = :mail");
+    $query = $pdo->prepare("SELECT Mdp, Id_user FROM Utilisateur WHERE Email = :mail");
     $query->bindParam(':mail', $mail);
     $query->execute();
     $pass = $query->fetch();
 
     if ($pass != NULL) {
         if ($pass[0] === $password) {
-            $result = true;
+            $userId = $pass[1];
         } else {
-            $result = false;
+            $userId = NULL;
         }
     } else {
-        $result = false;
+        $userId = NULL;
     }
-    return $result;
+    return $userId;
 }
 
-function getDayMeals($dayDate) {
+function getDayMeals($dayDate, $id) {
 
     $paramDate = $dayDate . '%';
 
     $pdo = getConnection();
     $query = $pdo->prepare("SELECT Type, Description, Kcal, Date, TIME(Date) AS heure 
                             FROM Repas 
-                            WHERE Id_user = 1 AND Date LIKE :paramDate");
+                            WHERE Id_user = :id AND Date LIKE :paramDate");
     $query->bindParam(':paramDate', $paramDate);
+    $query->bindParam(':id', $id);
     $query->execute();
     $meals = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -90,4 +91,43 @@ function getUserInfo($id) {
     $userInfo = $query->fetch(PDO::FETCH_ASSOC);
 
     return $userInfo;
+}
+
+function getEditUser ($id, $nom, $prenom, $sexe, $age, $email, $password, $poids, $taille, $activite) {
+
+    // $query = $pdo->prepare("INSERT INTO Utilisateur (Nom, Prenom, Sexe, Age, Email, Mdp, Poids, Taille, Activite)
+
+    $pdo = getConnection();
+    $query = $pdo->prepare("UPDATE Utilisateur 
+                            SET Nom = :nom, Prenom = :prenom, Sexe = :sexe, 
+                            Age = :age, Email = :email, Mdp = :mdp, 
+                            Poids = :poids, Taille = :taille, Activite = :activite 
+                            WHERE Id_user = :id");
+    $query->bindParam(':nom', $nom);
+    $query->bindParam(':prenom', $prenom);
+    $query->bindParam(':sexe', $sexe);
+    $query->bindParam(':age', $age);
+    $query->bindParam(':email', $email);
+    $query->bindParam(':mdp', $password);
+    $query->bindParam(':poids', $poids);
+    $query->bindParam(':taille', $taille);
+    $query->bindParam(':activite', $activite);
+    $query->bindParam(':id', $id);
+    $result = $query->execute();
+
+    return $result;
+}
+
+function getUserChangeInfo($id) {
+
+    $pdo = getConnection();
+    $query = $pdo->prepare("SELECT Nom, Prenom, Taille, Email, 
+                                    Sexe, Age, Poids, Taille, Activite
+                            FROM Utilisateur
+                            WHERE Id_user = :id");
+    $query->bindParam(':id', $id);
+    $query->execute();
+    $userChangeInfo = $query->fetch(PDO::FETCH_ASSOC);
+
+    return $userChangeInfo;
 }

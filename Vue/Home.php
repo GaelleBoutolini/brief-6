@@ -8,10 +8,10 @@
 <div class="secondMsgDaccueilUser">
     <form>
         <p class="msgDaccueilUser2"> Vous avez déjà utilisé notre app</P>
-        <input type="submit" name="log-in" value="Se connecter">
+        <a href="./index.php?action=displayLogin" type="submit" name="log-in">Se connecter</a>
 
-        <p class="msgDaccueilUser2"> Vous n'êtes pas encore inscrit </P>
-        <input type="submit" name="sign-up" value="Inscrivez-vous">
+        <p class="msgDaccueilUser2"> Vous n'êtes pas encore inscrit </p>
+        <a href="./index.php?action=displaySignup" name="sign-up">Inscrivez-vous</a>
     </form>
 </div>
 

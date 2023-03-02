@@ -221,13 +221,14 @@ section#stats{
  height: 600px;
  background: white;
  box-shadow: 0px 0px 5px #bababa;
- margin: 0 0 0 2%;
+
  border-radius: 25px;
  animation: slide-top cubic-bezier(0.250, 0.460, 0.450, 0.940) 800ms 800ms backwards
 }
 
 /*Responsive*/
 @media(min-width:768px){
+    
     #main-bottom {
         display: flex;
     }
@@ -252,6 +253,7 @@ section#stats{
     /*Stats*/
     #stats{
         width: 70%;
+        margin: 0 0 0 2%;
     }
 
 }
