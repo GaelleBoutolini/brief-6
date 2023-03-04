@@ -2,7 +2,7 @@
 <main>
     <div class="container">
         <form method="post" action="./index.php?action=editUser">
-            <h2>Modification</h2>
+            <h2>Modification du profil</h2>
             <div>
                 <label for="nom">Nom</label>
                 <input type="text" id="nom" name="nom" value="<?= $userChangeInfo['Nom'] ?>" required>
@@ -57,8 +57,8 @@
 
             <input id="form-btn" type="submit" value="Modification">
         </form>
+        <p id="empty"></p>
     </div>
-    <p></p>
 </main>
 
 <?php $logout = "<a href='./index.php?action=logout' class='logout' title='Déconnexion'><i class='fa-solid fa-power-off'></i></a>" ?>

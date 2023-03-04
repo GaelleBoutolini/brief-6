@@ -86,7 +86,8 @@ function login()
     }
 }
 
-function displayDashboard() {
+function displayDashboard()
+{
 
     if (!isset($_SESSION['id'])) {
         require './Vue/Home.php';
@@ -94,36 +95,34 @@ function displayDashboard() {
     } else {
         print_r($_SESSION);
         echo "<br>id = " .  $_SESSION['id'];
-   
+
+
+
+        $dayDate = date("Y-m-d", time());
+        echo $dayDate;
+        $id = $_SESSION['id'];
+
+        //fonction model (questionne la base de donnée)
+
+        //$meals = getDayMeals($date);              :tableau           //permet d'obtenir les infos des repas du jour
+        $meals = getDayMeals($dayDate, $id);
+
+        //$userInfo = getUserInfo();                :tableau           //permet d'obtenir les infos de l'user
+        $userInfo = getUserInfo($id);
+
+        //$lastTenDays = GetLastTenDays();          :tableau           //permet d'obtenir les calories des 10 derniers jours et les objectif (deux courbes)
+
+
+        //fonction controlleur (utilise les donnée rendue par le model pour faire des calcul)
+        $imc = round(imc($userInfo), 2);  
+        $physique = whatPhysique($imc);
+        
+        $dailyCalTotal = dailyCaloriesTotal($meals);
+        $dailyCalGoal = dailyCaloriesGoal($userInfo);
+        $goalAchieved = isGoalAchieved($dailyCalTotal, $dailyCalGoal);
+
+        require './Vue/Dashboard.php';
     }
-
-    $dayDate = date("Y-m-d", time()) ;
-    echo $dayDate;
-    $id = $_SESSION['id'];
-
-    //fonction model (questionne la base de donnée)
-
-    //$meals = getDayMeals($date);              :tableau           //permet d'obtenir les infos des repas du jour
-    $meals = getDayMeals($dayDate, $id);
-
-    //$userInfo = getUserInfo();                :tableau           //permet d'obtenir les infos de l'user
-    $userInfo = getUserInfo($id);
-
-    //$lastTenDays = GetLastTenDays();          :tableau           //permet d'obtenir les calories des 10 derniers jours et les objectif (deux courbes)
-
-
-
-    //fonction controlleur (utilise les donnée rendue par le model pour faire des calcul)
-
-    //$imc = imc($userInfo);                                              :int
-    $imc = round(imc($userInfo), 2);
-    //$physique = whatPhysique($imc);                                       :string
-    $physique = whatPhysique($imc);
-    //$dailyCalTotal = dailyCaloriesTotal($meals);                          :int
-    //$dailyCalGoal = dailyCaloriesGoal($userInfo);                         :int
-    //$goalAchieved = isGoalAchieved($dailyCalTotal, $dailyCalGoal);        :bool
-
-    require './Vue/Dashboard.php';
 }
 
 // Afficher la page d'ajout de repas
@@ -144,8 +143,68 @@ function displayCreateMeal()
 // Ajout d'un repas
 function createMeal()
 {
-
+    if (!empty($_POST)) {
+        $id = $_SESSION['id'];
+        $type = $_POST['type'];
+        $intitule = $_POST['intitule'];
+        $calories = $_POST['calories'];
+        $heureDate = $_POST['heure-date'];
+        $result = getCreateNewMeal($id, $type, $intitule, $calories, $heureDate);
+        print($result);
+        if ($result == true || $result == 1) {
+            header('Location: index.php?action=displayDashboard');
+        } else {
+            require './Vue/Error.php';
+        }
+    }
 }
+
+// Afficher la page d'ajout de repas
+
+function displayEditDeleteMeal()
+{
+    $repasId = $_GET['id'];
+    $mealInfo = getOneMealInfo($repasId);
+
+    print_r($mealInfo);
+    if (!isset($_SESSION['id'])) {
+        require './Vue/Home.php';
+        header('Location: index.php');
+    } else {
+        echo "<br>id = " .  $_SESSION['id'];
+
+        require './Vue/EditDeleteMeal.php';
+    }
+}
+// Modifier d'un repas
+function editMeal()
+{
+    if (!empty($_POST)) {
+        $repasId = $_GET['id'];
+        $type = $_POST['type'];
+        $intitule = $_POST['intitule'];
+        $calories = $_POST['calories'];
+        $heureDate = $_POST['heure-date'];
+        $result = getEditMeal($repasId, $type, $intitule, $calories, $heureDate);
+        if ($result == true || $result == 1) {
+            header('Location: index.php?action=displayDashboard');
+        } else {
+            require './Vue/Error.php';
+        }
+    }
+}
+
+function deleteMeal()
+{
+    $repasId = $_GET['id'];
+    $result = getDeleteMeal($repasId);
+    if ($result == true || $result == 1) {
+        header('Location: index.php?action=displayDashboard');
+    } else {
+        require './Vue/Error.php';
+    }
+
+
 
 // Afficher la page de modification d'utilisateur
 function displayEditUser()
@@ -266,23 +325,56 @@ function whatPhysique($imc) {
         $physique = "Non Renseigné";
         break;
     }
-
-    return $physique;
 }
 
-function dailyCaloriesTotal()
+function dailyCaloriesTotal($meals)
 {
-    //calcul total calorie de la journée
+    $total = 0;
+    foreach ($meals as $meal) {
+
+        $total += $meal['Kcal'];
+    }
+    return $total;
 }
 
-function dailyCaloriesGoal()
+function dailyCaloriesGoal($userInfo)
 {
-    //calcul TMB * activité
+    echo '<br>';
+    print_r($userInfo);
+    // Calcul du métabolisme de base
+    $MB = 14.2 * $userInfo['Poids'] + 593;
+    // Calcul du coef en fonction de l'activité
+    $coef = 0;
+    switch ($userInfo['Activite']) {
+        case 'Sédentaire':
+            $coef = 1.2;
+            break;
+        case 'Légèrement actif':
+            $coef = 1.375;
+            break;
+        case "Plutôt actif":
+            $coef = 1.55;
+            break;
+        case "Actif":
+            $coef = 1.725;
+            break;
+        case "Trés actif":
+            $coef = 1.9;
+            break;
+    }
+    $dailyCaloriesGoal = $MB * $coef;
+    return round($dailyCaloriesGoal);
 }
 
-function isGoalAchieved() {
-    //la limite journaliere a elle été depassé ?
-    //calorie total - calorie goal 
+function isGoalAchieved($dailyCalTotal, $dailyCalGoal)
+{
+    $isGoalAchieved = true;
+    if ($dailyCalTotal > $dailyCalGoal) {
+        $isGoalAchieved = false;
+    } else {
+        $isGoalAchieved = true;
+    }
+    return $isGoalAchieved;
 }
 
 function totalTenDaysCalories()

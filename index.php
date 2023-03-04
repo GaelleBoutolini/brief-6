@@ -19,8 +19,12 @@ try {
             displayEditUser();
         } else if ($_GET['action'] == 'editUser') {
             editUser();
-        } else if ($_GET['action'] == 'deleteUser') {
-            deleteUser();
+        } else if ($_GET['action'] == 'displayEditDeleteMeal') {
+            displayEditDeleteMeal();
+        } else if ($_GET['action'] == 'editMeal') {
+            editMeal();
+        } else if ($_GET['action'] == 'deleteMeal') {
+            deleteMeal();
         } else if ($_GET['action'] == 'displayDashboard') {
             displayDashboard();
         } else if ($_GET['action'] == 'logout') {
