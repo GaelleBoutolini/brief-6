@@ -113,10 +113,10 @@ function displayDashboard()
         //$lastTenDays = GetLastTenDays();          :tableau           //permet d'obtenir les calories des 10 derniers jours et les objectif (deux courbes)
 
 
-
         //fonction controlleur (utilise les donnée rendue par le model pour faire des calcul)
-
-        //$imc = imc($userInfo);                                                :int
+        $imc = round(imc($userInfo), 2);  
+        $physique = whatPhysique($imc);
+        
         $dailyCalTotal = dailyCaloriesTotal($meals);
         $dailyCalGoal = dailyCaloriesGoal($userInfo);
         $goalAchieved = isGoalAchieved($dailyCalTotal, $dailyCalGoal);
@@ -203,7 +203,8 @@ function deleteMeal()
     } else {
         require './Vue/Error.php';
     }
-}
+
+
 
 // Afficher la page de modification d'utilisateur
 function displayEditUser()
@@ -214,6 +215,11 @@ function displayEditUser()
     } else {
         print_r($_SESSION);
         echo "<br>id = " .  $_SESSION['id'];
+
+        $id = $_SESSION['id']; 
+
+        $userChangeInfo = getUserChangeInfo($id);
+
         require './Vue/EditUser.php';
     }
 }
@@ -221,12 +227,42 @@ function displayEditUser()
 // Modification d'un utilisateur 
 function editUser()
 {
-    require './Vue/Dashboard.php';
+    $id = $_SESSION['id'];
+
+    if (!empty($_POST)) {
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $sexe = $_POST['sexe'];
+        $age = $_POST['age'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $poids = $_POST['poids'];
+        $taille = $_POST['taille'];
+        $activite = $_POST['activite'];
+
+        echo $nom;
+        echo $prenom;
+        echo $sexe;
+        echo $age;
+        echo $email;
+        echo $password;
+        echo $poids;
+        echo $taille;
+        echo $activite;
+
+        $result = getEditUser($id, $nom, $prenom, $sexe, $age, $email, $password, $poids, $taille, $activite);
+        if ($result === true) {
+            header('Location: index.php?action=displayDashboard');
+        } else {
+            echo "<p>Une erreur est survenue</p>";
+        }
+    }
 }
 
 // Modification d'un utilisateur 
-function deleteUser()
+function deleteMeal()
 {
+
 }
 
 // Déconnexion
@@ -251,9 +287,44 @@ function error($msgErreur)
 //Fonctions de calcul
 //--------------------------------------
 
-function imc($userInfo)
-{
-    //calcul imc, aussi fait dans model->getUserInfo
+//calcul imc 
+function imc($userInfo) {
+    $weight = $userInfo["Poids"];
+    $size = $userInfo["Taille"] / 100;
+
+    $imc = $weight / ($size * $size) ;
+
+    return $imc;
+}
+
+function whatPhysique($imc) {
+    
+    switch (true) {
+    case ($imc < 16.5):
+        $physique = "Anorexie ou dénutrition";
+        break;
+    case ($imc >= 16.5 && $imc < 18.5):
+        $physique = "Insuffisance Ponderale";
+        break;
+    case ($imc >= 18.5 && $imc < 25):
+        $physique = "Corpulence normale";
+        break;
+    case ($imc >= 25 && $imc < 30):
+        $physique = "Surpoids";
+        break;
+    case ($imc >= 30 && $imc < 35):
+        $physique = "Obésité modérée (Classe 1)";
+        break;
+    case ($imc >= 35 && $imc < 40):
+        $physique = "Obésité élevé (Classe 2)";
+        break;
+    case ($imc >= 40):
+        $physique = "Obésite morbide ou massive";
+        break;
+    default:
+        $physique = "Non Renseigné";
+        break;
+    }
 }
 
 function dailyCaloriesTotal($meals)
@@ -317,5 +388,4 @@ function totalTenDaysCalories()
     //for(i = 0; i < 10; i++)               boucle*10 avec la date qui change a chaque iteration
     //$userInfo = getDayMeals($date);     
     // dailyCaloriesGoal($userInfo);
-
 }

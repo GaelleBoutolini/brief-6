@@ -61,8 +61,8 @@
                         <p><?= $userInfo["Prenom"] ?></p>
                         <p><?= $userInfo["Taille"] ?> cm</p>
                         <p><?= $userInfo["Poids"] ?> kg</p>
-                        <p>--- IMC : 21.5</p>
-                        <p>--- Corpulence normale</p>
+                        <p>IMC : <?= $imc ?></p>
+                        <p><?= $physique ?></p>
                         <p><?= $userInfo["Activite"] ?></p>
                     </div>
                 </section>
