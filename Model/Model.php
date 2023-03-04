@@ -145,6 +145,7 @@ function getDeleteMeal($id)
     $pdo = getConnection();
     $query = $pdo->prepare("DELETE FROM Repas WHERE Id_repas = :id");
     $query->bindParam(':id', $id);
+
     $result = $query->execute();
     return $result;
 }
