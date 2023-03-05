@@ -30,7 +30,7 @@
                 <input value='<?= $mealInfo[0]['Date'] ?>' type="datetime-local" id="heure-date" name="heure-date" required>
             </div>
             <div class="btn-group">
-                <input id="form-btn" type="submit" value="Ajouter">
+                <input id="form-btn" type="submit" value="Sauvegarder">
                 <a href=./index.php?action=deleteMeal&id=<?= $_GET['id'] ?> id="del-btn"><i class="fa-solid fa-trash"></i></a>
             </div>
         </form>

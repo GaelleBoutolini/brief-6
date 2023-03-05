@@ -1,10 +1,12 @@
 <?php ob_start(); ?>
 <main>
+
+    <?= $today ?>
     <div class="container">
         <div id="btn-container">
             <a id="add-btn" href="./index.php?action=displayCreateMeal">
                 <i class="fa-solid fa-plus"></i>
-                Ajouter un plat
+                Ajouter un repas
             </a>
         </div>
         <section id="historique">
@@ -68,12 +70,23 @@
                 </section>
             </div>
 
-            <section id="stats"></section>
+            <section id="stats">
+                <h2>Consommation calorique des 10 derniers jours</h2>
+                <div>
+                    <!-- Graphique des 10 derniers jours  -->
+                </div>
+            </section>
 
         </div>
     </div>
 </main>
 
+
+<script defer>
+    const statsArr = <?php echo json_encode($statsArr) ?>;
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+<script src="./Tools/js/stats.js" defer></script>
 
 <?php $title = 'Dashboard - Equilibra'; ?>
 <?php $style = './Tools/style/Dashboard.css'; ?>

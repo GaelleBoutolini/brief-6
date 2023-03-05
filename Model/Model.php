@@ -14,7 +14,6 @@ function getConnection()
         );
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        // echo 'whats good';
     } catch (Exception $e) {
         var_dump($e->getMessage());
         die();
@@ -72,7 +71,9 @@ function getDayMeals($dayDate, $id)
     $pdo = getConnection();
     $query = $pdo->prepare("SELECT Id_repas, Type, Description, Kcal,  DATE_FORMAT(Date, '%d/%m/%Y') as Date, DATE_FORMAT(TIME(Date), '%H:%i') AS heure
                             FROM Repas
-                            WHERE Id_user = :id AND Date LIKE :paramDate");
+                            WHERE Id_user = :id AND Date LIKE :paramDate
+                            ORDER BY heure");
+
     $query->bindParam(':paramDate', $paramDate);
     $query->bindParam(':id', $id);
     $query->execute();
@@ -148,8 +149,10 @@ function getDeleteMeal($id)
 
     $result = $query->execute();
     return $result;
+}
 
-function getEditUser ($id, $nom, $prenom, $sexe, $age, $email, $password, $poids, $taille, $activite) {
+function getEditUser($id, $nom, $prenom, $sexe, $age, $email, $password, $poids, $taille, $activite)
+{
 
     // $query = $pdo->prepare("INSERT INTO Utilisateur (Nom, Prenom, Sexe, Age, Email, Mdp, Poids, Taille, Activite)
 
@@ -174,7 +177,8 @@ function getEditUser ($id, $nom, $prenom, $sexe, $age, $email, $password, $poids
     return $result;
 }
 
-function getUserChangeInfo($id) {
+function getUserChangeInfo($id)
+{
 
     $pdo = getConnection();
     $query = $pdo->prepare("SELECT Nom, Prenom, Taille, Email, 
@@ -186,5 +190,4 @@ function getUserChangeInfo($id) {
     $userChangeInfo = $query->fetch(PDO::FETCH_ASSOC);
 
     return $userChangeInfo;
-
 }

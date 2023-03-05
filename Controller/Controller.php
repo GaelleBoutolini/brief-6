@@ -31,21 +31,12 @@ function signup()
         $taille = $_POST['taille'];
         $activite = $_POST['activite'];
 
-        // echo $nom;
-        // echo $prenom;
-        // echo $sexe;
-        // echo $age;
-        // echo $email;
-        // echo $password;
-        // echo $poids;
-        // echo $taille;
-        // echo $activite;
 
         $result = getSignup($nom, $prenom, $sexe, $age, $email, $password, $poids, $taille, $activite);
         if ($result === true) {
             require './Vue/Successfull_signup.php';
         } else {
-            echo "<p>Une erreur est survenue</p>";
+            require('./Vue/Error.php');
         }
     }
 }
@@ -60,22 +51,11 @@ function displayLogin()
 // Connexion de l'utilisateur
 function login()
 {
-    // if ($_SESSION['id']) {
-    //     require './Vue/Dashboard.php';
-    // } else {
-    //     require './Vue/Home.php';
-    // }
     if (!empty($_POST)) {
         $mail = $_POST['identifiant'];
         $password = $_POST['password'];
 
-        // echo $mail;
-        // echo $password;
-
         $userId = getLogin($mail, $password);
-
-        // print_r($result);
-
 
         if ($userId != NULL) {
             $_SESSION['id'] = $userId;
@@ -93,34 +73,26 @@ function displayDashboard()
         require './Vue/Home.php';
         header('Location: index.php');
     } else {
-        print_r($_SESSION);
-        echo "<br>id = " .  $_SESSION['id'];
-
-
-
         $dayDate = date("Y-m-d", time());
-        echo $dayDate;
         $id = $_SESSION['id'];
 
-        //fonction model (questionne la base de donnée)
+        //Fonctions modele (questionne la base de donnée)
 
-        //$meals = getDayMeals($date);              :tableau           //permet d'obtenir les infos des repas du jour
+        //permet d'obtenir les infos des repas du jour
         $meals = getDayMeals($dayDate, $id);
-
-        //$userInfo = getUserInfo();                :tableau           //permet d'obtenir les infos de l'user
+        //permet d'obtenir les infos de l'user
         $userInfo = getUserInfo($id);
 
-        //$lastTenDays = GetLastTenDays();          :tableau           //permet d'obtenir les calories des 10 derniers jours et les objectif (deux courbes)
 
 
-        //fonction controlleur (utilise les donnée rendue par le model pour faire des calcul)
-        $imc = round(imc($userInfo), 2);  
+        //Fonctions controleur (utilise les données rendues par le modele pour faire des calculs)
+        $imc = round(imc($userInfo), 1);
         $physique = whatPhysique($imc);
-        
+
         $dailyCalTotal = dailyCaloriesTotal($meals);
         $dailyCalGoal = dailyCaloriesGoal($userInfo);
         $goalAchieved = isGoalAchieved($dailyCalTotal, $dailyCalGoal);
-
+        $statsArr = totalTenDaysCalories($dailyCalGoal);
         require './Vue/Dashboard.php';
     }
 }
@@ -133,9 +105,6 @@ function displayCreateMeal()
         require './Vue/Home.php';
         header('Location: index.php');
     } else {
-        print_r($_SESSION);
-        echo "<br>id = " .  $_SESSION['id'];
-
         require './Vue/CreateMeal.php';
     }
 }
@@ -150,7 +119,6 @@ function createMeal()
         $calories = $_POST['calories'];
         $heureDate = $_POST['heure-date'];
         $result = getCreateNewMeal($id, $type, $intitule, $calories, $heureDate);
-        print($result);
         if ($result == true || $result == 1) {
             header('Location: index.php?action=displayDashboard');
         } else {
@@ -165,14 +133,10 @@ function displayEditDeleteMeal()
 {
     $repasId = $_GET['id'];
     $mealInfo = getOneMealInfo($repasId);
-
-    print_r($mealInfo);
     if (!isset($_SESSION['id'])) {
         require './Vue/Home.php';
         header('Location: index.php');
     } else {
-        echo "<br>id = " .  $_SESSION['id'];
-
         require './Vue/EditDeleteMeal.php';
     }
 }
@@ -193,7 +157,7 @@ function editMeal()
         }
     }
 }
-
+// Supprimer d'un repas
 function deleteMeal()
 {
     $repasId = $_GET['id'];
@@ -203,8 +167,7 @@ function deleteMeal()
     } else {
         require './Vue/Error.php';
     }
-
-
+}
 
 // Afficher la page de modification d'utilisateur
 function displayEditUser()
@@ -213,13 +176,8 @@ function displayEditUser()
         require './Vue/Home.php';
         header('Location: index.php');
     } else {
-        print_r($_SESSION);
-        echo "<br>id = " .  $_SESSION['id'];
-
-        $id = $_SESSION['id']; 
-
+        $id = $_SESSION['id'];
         $userChangeInfo = getUserChangeInfo($id);
-
         require './Vue/EditUser.php';
     }
 }
@@ -240,37 +198,18 @@ function editUser()
         $taille = $_POST['taille'];
         $activite = $_POST['activite'];
 
-        echo $nom;
-        echo $prenom;
-        echo $sexe;
-        echo $age;
-        echo $email;
-        echo $password;
-        echo $poids;
-        echo $taille;
-        echo $activite;
-
         $result = getEditUser($id, $nom, $prenom, $sexe, $age, $email, $password, $poids, $taille, $activite);
         if ($result === true) {
             header('Location: index.php?action=displayDashboard');
         } else {
-            echo "<p>Une erreur est survenue</p>";
+            require './Vue/Error.php';
         }
     }
-}
-
-// Modification d'un utilisateur 
-function deleteMeal()
-{
-
 }
 
 // Déconnexion
 function logout()
 {
-    /*Si la variable de session age est définie, on echo sa valeur
-             *puis on la détruit avec unset()*/
-
     home();
     header('Location: index.php');
 }
@@ -287,60 +226,64 @@ function error($msgErreur)
 //Fonctions de calcul
 //--------------------------------------
 
-//calcul imc 
-function imc($userInfo) {
+// Calcul de l'imc 
+// Poids / (Taille * Taille)
+
+function imc($userInfo)
+{
     $weight = $userInfo["Poids"];
     $size = $userInfo["Taille"] / 100;
 
-    $imc = $weight / ($size * $size) ;
+    $imc = $weight / ($size * $size);
 
     return $imc;
 }
 
-function whatPhysique($imc) {
-    
-    switch (true) {
-    case ($imc < 16.5):
-        $physique = "Anorexie ou dénutrition";
-        break;
-    case ($imc >= 16.5 && $imc < 18.5):
-        $physique = "Insuffisance Ponderale";
-        break;
-    case ($imc >= 18.5 && $imc < 25):
-        $physique = "Corpulence normale";
-        break;
-    case ($imc >= 25 && $imc < 30):
-        $physique = "Surpoids";
-        break;
-    case ($imc >= 30 && $imc < 35):
-        $physique = "Obésité modérée (Classe 1)";
-        break;
-    case ($imc >= 35 && $imc < 40):
-        $physique = "Obésité élevé (Classe 2)";
-        break;
-    case ($imc >= 40):
-        $physique = "Obésite morbide ou massive";
-        break;
-    default:
-        $physique = "Non Renseigné";
-        break;
+// Défini la forme physique du user en fonction de son imc
+function whatPhysique($imc)
+{
+    $physique = 0;
+    switch ($imc) {
+        case ($imc < 16.5):
+            $physique = "Anorexie ou dénutrition";
+            break;
+        case ($imc >= 16.5 && $imc < 18.5):
+            $physique = "Insuffisance Ponderale";
+            break;
+        case ($imc >= 18.5 && $imc < 25):
+            $physique = "Corpulence normale";
+            break;
+        case ($imc >= 25 && $imc < 30):
+            $physique = "Surpoids";
+            break;
+        case ($imc >= 30 && $imc < 35):
+            $physique = "Obésité modérée (Classe 1)";
+            break;
+        case ($imc >= 35 && $imc < 40):
+            $physique = "Obésité élevé (Classe 2)";
+            break;
+        case ($imc >= 40):
+            $physique = "Obésite morbide ou massive";
+            break;
+        default:
+            $physique = "Non Renseigné";
+            break;
     }
+    return $physique;
 }
-
+// Calcul le total de calories consommé dans la journée
 function dailyCaloriesTotal($meals)
 {
     $total = 0;
     foreach ($meals as $meal) {
-
         $total += $meal['Kcal'];
     }
     return $total;
 }
-
+// Calcul la limite calorique pour perdre du poids
+// Méthode oxford : (14.2 x Poids + 593) * coef;
 function dailyCaloriesGoal($userInfo)
 {
-    echo '<br>';
-    print_r($userInfo);
     // Calcul du métabolisme de base
     $MB = 14.2 * $userInfo['Poids'] + 593;
     // Calcul du coef en fonction de l'activité
@@ -365,7 +308,7 @@ function dailyCaloriesGoal($userInfo)
     $dailyCaloriesGoal = $MB * $coef;
     return round($dailyCaloriesGoal);
 }
-
+// Vérifie si l'objectif a été réussi ou non
 function isGoalAchieved($dailyCalTotal, $dailyCalGoal)
 {
     $isGoalAchieved = true;
@@ -377,15 +320,27 @@ function isGoalAchieved($dailyCalTotal, $dailyCalGoal)
     return $isGoalAchieved;
 }
 
-function totalTenDaysCalories()
+// Calcul des calories des 10 derniers jours
+function totalTenDaysCalories($dailyCalGoal)
 {
-    //pour le graphique, 10 jours de 
-    //->dailyCaloriesTotal
-    // et 
-    //-> dailyTenDaysCalories
+    $today = time();
+    $id = $_SESSION['id'];
+    $daysArr = [];
+    $caloriesGoalArr = [];
+    $lastTenDayCaloriesArr = [];
+    for ($i = 0; $i < 10; $i++) {
+        array_unshift($daysArr, date("d/m", $today));
 
+        // Courbe consommation calorique
+        $dayDate = date("Y-m-d", $today);
+        $meals = getDayMeals($dayDate, $id);
+        array_unshift($lastTenDayCaloriesArr,  dailyCaloriesTotal($meals));
+        $today -= 86400;
 
-    //for(i = 0; i < 10; i++)               boucle*10 avec la date qui change a chaque iteration
-    //$userInfo = getDayMeals($date);     
-    // dailyCaloriesGoal($userInfo);
+        // Courbe objectif
+        array_unshift($caloriesGoalArr, $dailyCalGoal);
+    };
+    $statsArr[] = [$lastTenDayCaloriesArr, $caloriesGoalArr, $daysArr];
+    return $statsArr;
+    //retourne un tableau avec le total calorique des derniers 10 jours
 }
