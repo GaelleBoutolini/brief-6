@@ -47,7 +47,7 @@
                 <label for="activite">Activité</label>
                 <select name="activite" id="activite">
                     <option value="Sédentaire">Sédentaire</option>
-                    <option value="Légérement actif">Légérement actif</option>
+                    <option value="Légèrement actif">Légèrement actif</option>
                     <option value="Plutôt actif">Plutôt actif</option>
                     <option value="Actif">Actif</option>
                     <option value="Trés actif">Trés actif</option>

@@ -64,6 +64,12 @@ span#today{
     transition: 300ms;
     animation: scale 400ms backwards
 }
+
+#add-btn:hover{
+    background: linear-gradient(90deg, #005BE9, #019AF1);
+    box-shadow: 5px 5px 2px #FFCE61;
+}
+
 @keyframes scale {
     0% {
       transform: scale(0);
@@ -74,11 +80,8 @@ span#today{
       opacity: 1;
     }
   }
-#add-btn:hover{
-    background: linear-gradient(90deg, #005BE9, #019AF1);
-    box-shadow: 5px 5px 2px #FFCE61;
-}
 
+/*Repas*/
 #repas{
     display: flex;
     justify-content: center;
@@ -88,6 +91,7 @@ span#today{
 
 #repas .nom-repas{
    margin-bottom: 30px;
+   font-size: 14px;
 }
 
 .repas-container{
