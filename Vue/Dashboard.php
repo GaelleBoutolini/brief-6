@@ -19,14 +19,14 @@
                         <h3><?= $meal["Type"] ?></h3>
                         <span class="nom-repas"><?= $meal["Description"] ?></span>
                         <div>
-                            <span class="kcal"><span><?= $meal["Kcal"] ?></span>kcal</span>
+                            <span class="kcal"><span><?= $meal["Kcal"] ?>kcal</span></span>
                             <span class="heure"><?= $meal["heure"] ?></span>
                         </div>
                     </a>
                 <?php endforeach; ?>
 
             </div>
-            <div id="total-kcal">Total : <span><?= $dailyCalTotal ?></span>kcal</div>
+            <div id="total-kcal">Total calorique de la journée : <strong><?= $dailyCalTotal ?>kcal</strong></div>
         </section>
         <div id="main-bottom">
             <div id="objectif-profil">

@@ -1,20 +1,24 @@
 <?php
 require './Model/Model.php';
-
 session_start();
 
 function home()
 {
 
-    session_unset();
+
     require './Vue/Home.php';
 };
 
 // Afficher la page d'inscription
 function displaySignup()
 {
-    session_unset();
-    require './Vue/Signup.php';
+
+    if (isset($_SESSION['id'])) {
+        header('Location: index.php?action=displayDashboard');
+        require './Vue/Dashboard.php';
+    } else {
+        require './Vue/Signup.php';
+    }
 }
 
 // Inscription de l'utilisateur
@@ -44,24 +48,34 @@ function signup()
 // Afficher la page de connexion
 function displayLogin()
 {
-    require './Vue/Login.php';
+    if (!isset($_SESSION['id'])) {
+        require './Vue/Login.php';
+    } else {
+        header('Location: index.php?action=displayDashboard');
+        require './Vue/Dashboard.php';
+    }
 }
 
 
 // Connexion de l'utilisateur
 function login()
 {
-    if (!empty($_POST)) {
-        $mail = $_POST['identifiant'];
-        $password = $_POST['password'];
+    if (isset($_SESSION['id'])) {
+        header('Location: index.php?action=displayDashboard');
+        require './Vue/displayDashboard.php';
+    } else {
+        if (!empty($_POST)) {
+            $mail = $_POST['identifiant'];
+            $password = $_POST['password'];
+            $userId = getLogin($mail, $password);
 
-        $userId = getLogin($mail, $password);
-
-        if ($userId != NULL) {
-            $_SESSION['id'] = $userId;
-            header('Location: index.php?action=displayDashboard');
-        } else {
-            $erreurConnexion = "<p>Mdp/Id incorrect</p>";
+            if ($userId != NULL) {
+                $_SESSION['id'] = $userId;
+                header('Location: index.php?action=displayDashboard');
+            } else {
+                $erreurConnexion = "Identifiants incorrects";
+                require './Vue/Login.php';
+            }
         }
     }
 }
@@ -210,7 +224,8 @@ function editUser()
 // Déconnexion
 function logout()
 {
-    home();
+    session_unset();
+    require './Vue/Home.php';
     header('Location: index.php');
 }
 

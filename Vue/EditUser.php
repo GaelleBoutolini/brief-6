@@ -42,7 +42,8 @@
             </div>
             <div>
                 <label for="activite">Activité</label>
-                <select name="activite" id="activite" value="<?= $userChangeInfo['Activite'] ?>">
+                <select name="activite" id="activite">
+                    <option value="<?= $userChangeInfo['Activite'] ?>"><?= $userChangeInfo['Activite'] ?> (Séléctionné)</option>
                     <option value="Sédentaire">Sédentaire</option>
                     <option value="Légèrement actif">Légèrement actif</option>
                     <option value="Plutôt actif">Plutôt actif</option>

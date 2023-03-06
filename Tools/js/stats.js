@@ -29,6 +29,7 @@ const ctx = document.createElement('canvas');
         scales: {
           y: {
             min: 0,
+            step : 100,
           }
         }
       }
