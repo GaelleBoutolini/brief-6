@@ -6,7 +6,10 @@
     font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
 }
-     
+
+
+/*Général*/
+
 body {
     margin: 0;
     display: flex;
@@ -26,7 +29,7 @@ h2 {
 #header {
     /* height: 9.89vh; */
     height: 100px;
-    background-image: linear-gradient(31deg, #0072D2 0%, #0072D2 15%, #0093F1 15%, #0093F1 60%, #0072D2 60%, #0072D2);
+    background: linear-gradient(31deg, #0072D2 0%, #0072D2 15%, #0093F1 15%, #0093F1 60%, #0072D2 60%, #0072D2);
     position: relative;
 }
 

@@ -10,7 +10,6 @@ main{
 .container {
     margin: 5px;
     animation: slide-top cubic-bezier(0.250, 0.460, 0.450, 0.940) 800ms backwards
-
 }
 
 main p {

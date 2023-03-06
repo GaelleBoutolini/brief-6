@@ -1,4 +1,9 @@
 <?php ob_start(); ?>
+<div id="loader">
+    <div id="dot1"></div>
+    <div id="dot2"></div>
+    <div id="dot3"></div>
+</div>
 <main>
 
     <?= $today ?>
