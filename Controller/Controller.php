@@ -4,8 +4,6 @@ session_start();
 
 function home()
 {
-
-
     require './Vue/Home.php';
 };
 
