@@ -1,6 +1,8 @@
 <?php ob_start(); ?>
-<h2>Error <? $msgErreur ?> </h2>
+<main>
+    <h2>Error</h2>
+    <p><?= $result ?></p>
+</main>
 
-<?php print_r($userInfo); ?>
 <?php $contenu = ob_get_clean(); ?>
 <?php require 'Template.php'; ?>

@@ -2,11 +2,11 @@
 <main>
     <div class="container">
 
-        <form method="post" action="./index.php?action=editUser">
+        <form method="post" action="./index.php?action=createMeal">
             <h2>Nouveau plat</h2>
             <div>
-                <label for="activite">Activité</label>
-                <select name="activite" id="activite">
+                <label for="type">Type du plat</label>
+                <select name="type" id="type">
                     <option value="Petit-déj">Petit-déj</option>
                     <option value="Collation">Collation</option>
                     <option value="Déjeuner">Déjeuner</option>
@@ -29,7 +29,7 @@
             </div>
             <input id="form-btn" type="submit" value="Ajouter">
         </form>
-        <p></p>
+        <p id="empty"></p>
     </div>
 </main>
 
