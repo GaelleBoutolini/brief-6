@@ -4,8 +4,6 @@ session_start();
 
 function home()
 {
-
-
     require './Vue/Home.php';
 };
 
@@ -35,13 +33,16 @@ function signup()
         $taille = $_POST['taille'];
         $activite = $_POST['activite'];
 
-
         $result = getSignup($nom, $prenom, $sexe, $age, $email, $password, $poids, $taille, $activite);
-        if ($result === true) {
+
+        if ($result == true || $result == 1) {
+
             require './Vue/Successfull_signup.php';
         } else {
-            require('./Vue/Error.php');
+            $erreurInscription = "L'adresse email existe déjà.";
+            require './Vue/Signup.php';
         }
+        print_r($result);
     }
 }
 
