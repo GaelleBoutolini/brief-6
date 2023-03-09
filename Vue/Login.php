@@ -21,7 +21,10 @@
                 <?php endif ?>
             </div>
 
+
+            <?php if (isset($erreurConnexion)) : ?>
             <p style="color: red"><?php echo $erreurConnexion ?></p>
+            <?php endif ?>
 
             <input id="form-btn" type="submit" value="Connexion">
         </form>

@@ -95,8 +95,7 @@ function displayDashboard()
         //permet d'obtenir les infos de l'user
         $userInfo = getUserInfo($id);
 
-
-
+        
         //Fonctions controleur (utilise les données rendues par le modele pour faire des calculs)
         $imc = round(imc($userInfo), 1);
         $physique = whatPhysique($imc);
