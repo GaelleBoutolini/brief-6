@@ -19,8 +19,8 @@
                 <div>
                     <label for="sexe">Sexe</label>
                     <select name="sexe" id="sexe" value="<?= $userChangeInfo['Sexe'] ?>">
-                        <option value="Homme">Homme</option>
-                        <option value="Femme">Femme</option>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
                     </select>
                 </div>
 

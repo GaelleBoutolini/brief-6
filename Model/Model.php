@@ -25,18 +25,25 @@ function getConnection()
 function getSignup($nom, $prenom, $sexe, $age, $email, $password, $poids, $taille, $activite)
 {
     $pdo = getConnection();
-    $query = $pdo->prepare("INSERT INTO Utilisateur (Nom, Prenom, Sexe, Age, Email, Mdp, Poids, Taille, Activite)
+    $isEmailExist = $pdo->prepare("SELECT Email FROM Utilisateur WHERE Email = :emailVerif");
+    $isEmailExist->bindParam(':emailVerif', $email);
+    $isEmailExist->execute();
+    $resultEmail = $isEmailExist->fetch();
+    if ($resultEmail) {
+    } else {
+        $query = $pdo->prepare("INSERT INTO Utilisateur (Nom, Prenom, Sexe, Age, Email, Mdp, Poids, Taille, Activite)
         VALUES (:nom, :prenom, :sexe, :age, :email, :mdp, :poids, :taille, :activite)");
-    $query->bindParam(':nom', $nom);
-    $query->bindParam(':prenom', $prenom);
-    $query->bindParam(':sexe', $sexe);
-    $query->bindParam(':age', $age);
-    $query->bindParam(':email', $email);
-    $query->bindParam(':mdp', $password);
-    $query->bindParam(':poids', $poids);
-    $query->bindParam(':taille', $taille);
-    $query->bindParam(':activite', $activite);
-    $result = $query->execute();
+        $query->bindParam(':nom', $nom);
+        $query->bindParam(':prenom', $prenom);
+        $query->bindParam(':sexe', $sexe);
+        $query->bindParam(':age', $age);
+        $query->bindParam(':email', $email);
+        $query->bindParam(':mdp', $password);
+        $query->bindParam(':poids', $poids);
+        $query->bindParam(':taille', $taille);
+        $query->bindParam(':activite', $activite);
+        $result = $query->execute();
+    }
 
     return $result;
 }

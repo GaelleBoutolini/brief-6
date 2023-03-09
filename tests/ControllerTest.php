@@ -1,11 +1,16 @@
 <?php
+
 declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
+
 require_once "./Controller/Controller.php";
 
-class ControllerTest extends TestCase {
+class ControllerTest extends TestCase
+{
 
-    public function testImc() {
+    public function testImc()
+    {
 
         $userInfo = [
             "Poids" => 70,
@@ -15,12 +20,14 @@ class ControllerTest extends TestCase {
         $this->assertEquals(22.86, round($result, 2));
     }
 
-    public function testWhatPhysique() {
+    public function testWhatPhysique()
+    {
         $result = whatPhysique(22.9);
         $this->assertEquals("Corpulence normale", $result);
     }
 
-    public function testDailyCaloriesTotal() {
+    public function testDailyCaloriesTotal()
+    {
         $meals = [
             ["Kcal" => 200],
             ["Kcal" => 500],
@@ -31,7 +38,8 @@ class ControllerTest extends TestCase {
         $this->assertEquals(1900, $result);
     }
 
-    public function testDailyCaloriesGoal() {
+    public function testDailyCaloriesGoal()
+    {
         $userInfo = [
             "Poids" => 70,
             "Activite" => "Sédentaire",
@@ -40,9 +48,9 @@ class ControllerTest extends TestCase {
         $this->assertEquals(1904, $result);
     }
 
-    public function testIsGoalAchieved() {
+    public function testIsGoalAchieved()
+    {
         $result = isGoalAchieved(1500, 1900);
         $this->assertEquals(true, $result);
     }
-
 }

@@ -7,7 +7,6 @@
             <div>
                 <label for="type">Type du plat</label>
                 <select name="type" id="type">
-                    value='<?= $mealInfo[0]['Type'] ?>'
                     <option value='<?= $mealInfo[0]['Type'] ?>'> <?= $mealInfo[0]['Type'] ?> (sélectionné) </option>
                     <option value='Petit-déj'>Petit-déj</option>
                     <option value="Collation">Collation</option>
