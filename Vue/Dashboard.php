@@ -5,6 +5,7 @@
     <div id="dot3"></div>
 </div>
 <main>
+
     <div class="container">
         <div id="btn-container">
             <a id="add-btn" href="./index.php?action=displayCreateMeal">
