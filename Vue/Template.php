@@ -7,9 +7,8 @@
     <link href="./Tools/style/Template.css" rel="stylesheet">
     <link href="<?= $style ?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="./Tools/image/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="./Tools/image/favicon.ico" type="image/x-icon">
-
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+git 
 
     <title><?= $title ?></title>
 </head>
