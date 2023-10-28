@@ -8,7 +8,7 @@ function getConnection()
 
     try {
         $pdo = new PDO(
-            'mysql:host=localhost;dbname=Equilibra;charset=utf8',
+            'mysql:host=localhost;dbname=Equilibra1;charset=utf8',
             $user,
             $pass
         );
