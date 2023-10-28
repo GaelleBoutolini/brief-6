@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,11 +8,12 @@
     <link href="<?= $style ?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="./Tools/image/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./Tools/image/favicon.ico" type="image/x-icon">
+
+
     <title><?= $title ?></title>
 </head>
-
 <body>
-
     <!-----------------------------------header -->
     <header>
         <div id="header">
@@ -36,7 +36,6 @@
                 <p id="logoText">Equilibra</p>
             </div>
         </div>
-
         <div id="footerText">
             <div id="footerTextLeft">
                 <p>EQUILIBRA SARL.</p>
@@ -59,5 +58,4 @@
 
     </footer>
 </body>
-
 </html>
